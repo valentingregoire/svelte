@@ -1,3 +1,5 @@
-<Component let:x={{foo = 1}}>
+<script>
+	let browser = !import.meta.env.SSR;
+</script>
 
-</Component>
+<p>Hello from the {browser ? 'client' : 'server'}!</p>
