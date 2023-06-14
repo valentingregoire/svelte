@@ -84,6 +84,7 @@ export default class Wrapper {
 	}
 
 	/**
+	 * @abstract
 	 * @param {import('../../Block.js').default} _block
 	 * @param {import('estree').Identifier} _parent_node
 	 * @param {import('estree').Identifier} _parent_nodes

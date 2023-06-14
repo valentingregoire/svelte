@@ -45,6 +45,9 @@ export default class Node {
 	/** @type {boolean} */
 	is_static_content;
 
+	/** @type {boolean} */
+	should_repair = false;
+
 	/** @type {string} */
 	var;
 
@@ -83,6 +86,11 @@ export default class Node {
 	not_static_content() {
 		this.is_static_content = false;
 		if (this.parent) this.parent.not_static_content();
+	}
+
+	should_be_repaired() {
+		this.should_repair = true;
+		if (this.parent) this.parent.should_be_repaired();
 	}
 
 	/** @param {RegExp} selector */

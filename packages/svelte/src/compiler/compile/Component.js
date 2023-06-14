@@ -1588,26 +1588,16 @@ export default class Component {
 			}
 		);
 		const cycle = check_graph_for_cycles(
-			unsorted_reactive_declarations.reduce(
-				/**
-				 * @param {any} acc
-				 * @param {any} declaration
-				 */ (acc, declaration) => {
-					declaration.assignees.forEach(
-						/** @param {any} v */ (v) => {
-							declaration.dependencies.forEach(
-								/** @param {any} w */ (w) => {
-									if (!declaration.assignees.has(w)) {
-										acc.push([v, w]);
-									}
-								}
-							);
+			unsorted_reactive_declarations.reduce((acc, declaration) => {
+				declaration.assignees.forEach((v) => {
+					declaration.dependencies.forEach((w) => {
+						if (!declaration.assignees.has(w)) {
+							acc.push([v, w]);
 						}
-					);
-					return acc;
-				},
-				[]
-			)
+					});
+				});
+				return acc;
+			}, [])
 		);
 		if (cycle && cycle.length) {
 			const declarationList = lookup.get(cycle[0]);
@@ -1632,11 +1622,9 @@ export default class Component {
 		unsorted_reactive_declarations.forEach(add_declaration);
 	}
 	check_if_tags_content_dynamic() {
-		this.tags.forEach(
-			/** @param {any} tag */ (tag) => {
-				tag.check_if_content_dynamic();
-			}
-		);
+		this.tags.forEach((tag) => {
+			tag.check_if_content_dynamic();
+		});
 	}
 
 	/**

@@ -9,6 +9,7 @@
 		},
 		{
 			"type": "node",
+			"runtimeArgs": ["--watch"],
 			"request": "launch",
 			"name": "Playground: Server",
 			"outputCapture": "std",

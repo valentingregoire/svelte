@@ -27,13 +27,19 @@ export default class Tag extends Node {
 			info.expression.type !== 'Identifier' ||
 			(this.expression.dependencies.size && scope.names.has(info.expression.name));
 	}
+
 	is_dependencies_static() {
 		return (
 			this.expression.dynamic_contextual_dependencies().length === 0 &&
 			this.expression.dynamic_dependencies().length === 0
 		);
 	}
+
 	check_if_content_dynamic() {
+		if (this.expression.dependencies.size > 0) {
+			this.should_be_repaired();
+		}
+
 		if (!this.is_dependencies_static()) {
 			this.not_static_content();
 		}
